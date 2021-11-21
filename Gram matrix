@@ -1,0 +1,11 @@
+# Define Gram matrice
+def gramMatrice(layer):
+    layerShape = layer.shape
+    batch_size = layerShape[0]
+    width = layerShape[1]
+    height = layerShape[2]
+    num_filters = layerShape[3]
+    
+    filters = tf.reshape(layer, tf.stack([batch_size, -1, num_filters]))
+    
+    return tf.matmul(filters, filters, transpose_a=True) / tf.cast(tf.size(layer),tf.float32)
